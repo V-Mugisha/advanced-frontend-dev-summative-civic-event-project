@@ -27,6 +27,10 @@ body {
     z-index: 100;
 }
 
+.user-menu summary::-webkit-details-marker {
+    display: none;
+}
+
 .message {
     background: #0f172a;
     border: 1px solid #475569;
