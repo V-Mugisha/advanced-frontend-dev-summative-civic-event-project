@@ -15,6 +15,10 @@
             return;
         }
 
+        if (window.location.search.indexOf('deleted=1') !== -1) {
+            UI.showMessage('page-message', 'Event deleted successfully.', 'success');
+        }
+
         searchFromUrl = getQuery('search');
 
         if (searchFromUrl) {

@@ -99,6 +99,25 @@
         return true;
     }
 
+    function isAdmin() {
+        var user = getUser();
+        return user !== null && user.role === 'admin';
+    }
+
+    // ROLE-BASED GUARD: admin pages call this before loading admin data.
+    function requireAdmin() {
+        if (!requireAuth()) {
+            return false;
+        }
+
+        if (!isAdmin()) {
+            window.location.replace('index.html?forbidden=1');
+            return false;
+        }
+
+        return true;
+    }
+
     function redirectIfAuthenticated() {
         if (isAuthenticated()) {
             window.location.replace('index.html');
@@ -119,7 +138,9 @@
         saveSession: saveSession,
         clearSession: clearSession,
         isAuthenticated: isAuthenticated,
+        isAdmin: isAdmin,
         requireAuth: requireAuth,
+        requireAdmin: requireAdmin,
         redirectIfAuthenticated: redirectIfAuthenticated,
         logout: logout
     };

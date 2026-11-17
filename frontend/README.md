@@ -2,7 +2,7 @@
 
 Static frontend for the CivicEvents+ assignment. It uses HTML, Tailwind CSS from the Play CDN, and jQuery.
 
-Current scope: authentication plus events browsing and registration.
+Current scope: authentication, events browsing, event registration, admin event management, and event feedback.
 
 ## Prerequisites
 
@@ -53,3 +53,10 @@ Change that value if the backend runs elsewhere. CORS is enabled on the provided
 - Event details use `GET /api/events/:id`.
 - Registration uses the register and cancel endpoints.
 - After a registration is cancelled, the API does not allow registering for the same event again.
+- Admins create and edit events in `event-form.html`, including image uploads up to 2 MB.
+- Admins do not register for events because they organize them.
+- Events are always published because the API does not support changing that field.
+- Normal users must be registered for an event before the feedback form appears.
+- Normal users can add or update their own feedback.
+- Admins do not see the attendee feedback form because they organize the event.
+- Only admins can load all feedback for an event and see the average rating.
