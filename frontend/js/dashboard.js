@@ -12,6 +12,8 @@
 
         if (window.location.search.indexOf('welcome=1') !== -1) {
             UI.showMessage('page-message', 'Signed in successfully.', 'success');
+        } else if (window.location.search.indexOf('forbidden=1') !== -1) {
+            UI.showMessage('page-message', 'You do not have permission to open that page.', 'error');
         }
 
         $('#api-base').text(window.CivicConfig.apiBaseUrl);

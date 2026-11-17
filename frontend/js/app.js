@@ -20,6 +20,12 @@
             return;
         }
 
+        // ROLE-BASED GUARD: pages with data-require-admin are limited to admins.
+        if ($('body').attr('data-require-admin') === 'true' && !Auth.isAdmin()) {
+            window.location.replace('index.html?forbidden=1');
+            return;
+        }
+
         $('#app-shell').removeClass('hidden');
 
         name = user.full_name || 'there';
@@ -44,7 +50,7 @@
             }
         });
 
-        if (page.indexOf('event') === 0) {
+        if (page === 'event-detail.html') {
             $('[data-nav="events.html"]').addClass('bg-slate-800 text-white');
         }
 

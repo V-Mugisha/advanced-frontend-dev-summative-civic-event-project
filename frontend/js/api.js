@@ -76,9 +76,39 @@
         });
     }
 
+    function formRequest(path, method, formData, isPublic) {
+        var settings = {
+            url: apiUrl(path),
+            type: method,
+            data: formData,
+            dataType: 'json',
+            processData: false,
+            contentType: false
+        };
+        var token = window.CivicAuth ? window.CivicAuth.getToken() : null;
+
+        if (!isPublic && token) {
+            settings.headers = {
+                Authorization: 'Bearer ' + token
+            };
+        }
+
+        return $.ajax(settings).fail(function (xhr) {
+            if (xhr.status === 401 && !isPublic) {
+                handleUnauthorized();
+            }
+        });
+    }
+
     window.CivicAPI = {
         request: request,
         error: error,
+        postForm: function (path, formData, isPublic) {
+            return formRequest(path, 'POST', formData, isPublic);
+        },
+        putForm: function (path, formData, isPublic) {
+            return formRequest(path, 'PUT', formData, isPublic);
+        },
         get: function (path, isPublic) {
             return request(path, 'GET', undefined, isPublic);
         },
