@@ -3,11 +3,11 @@
 
     $(function () {
         var Auth = window.CivicAuth;
-        var UI = window.CivicUI;
         var user;
         var name;
+        var page;
 
-        // AUTH GUARD: this page is only available to signed-in users.
+        // AUTH GUARD: every page that loads app.js requires a valid session.
         if (!Auth.requireAuth()) {
             return;
         }
@@ -21,20 +21,31 @@
         }
 
         $('#app-shell').removeClass('hidden');
+
         name = user.full_name || 'there';
-
-        if (window.location.search.indexOf('welcome=1') !== -1) {
-            UI.showMessage('page-message', 'Signed in successfully.', 'success');
-        }
-
         $('[data-user-name]').text(name);
         $('[data-user-role]').text(user.role === 'admin' ? 'Administrator' : 'Member');
         $('[data-user-initials]').text(name.charAt(0).toUpperCase());
-        $('#api-base').text(window.CivicConfig.apiBaseUrl);
 
-        // ROLE-BASED GUARD: admin-only UI is shown only when role is admin.
+        // ROLE-BASED GUARD: admin-only elements start hidden and are shown here.
         if (user.role === 'admin') {
-            $('#admin-note').removeAttr('hidden');
+            $('[data-admin-only]').removeClass('hidden');
+        }
+
+        page = window.location.pathname.split('/').pop();
+
+        if (!page) {
+            page = 'index.html';
+        }
+
+        $('[data-nav]').each(function () {
+            if ($(this).attr('href') === page) {
+                $(this).addClass('bg-slate-800 text-white');
+            }
+        });
+
+        if (page.indexOf('event') === 0) {
+            $('[data-nav="events.html"]').addClass('bg-slate-800 text-white');
         }
 
         $('[data-logout]').on('click', function () {

@@ -2,7 +2,7 @@
 
 Static frontend for the CivicEvents+ assignment. It uses HTML, Tailwind CSS from the Play CDN, and jQuery.
 
-Current scope: authentication only. This includes signup, login, session handling, and a temporary authenticated home page.
+Current scope: authentication plus events browsing and registration.
 
 ## Prerequisites
 
@@ -43,24 +43,12 @@ Change that value if the backend runs elsewhere. CORS is enabled on the provided
 - Sessions use `sessionStorage` by default. "Remember me" uses `localStorage`; use it only on a trusted device.
 - Tokens expire after one hour. A protected request that returns `401` clears the session and redirects to login.
 - Success and error messages use normal page elements. Signup success uses a simple toast because the assignment asks for it.
-- Protected pages call `CivicAuth.requireAuth()`. Role-based guards are commented in `js/auth.js` and `js/home.js`.
+- Protected pages call `CivicAuth.requireAuth()`. Role-based guards are commented in `js/auth.js`, `js/app.js`, and pages with admin actions.
 
-## Current pages
+## Events behavior
 
-- `signup.html`: account creation, confirm password, strength meter, client validation.
-- `login.html`: sign in, remember me, session messages.
-- `index.html`: temporary authenticated home page with user details and logout.
-
-## Testing admin access
-
-There are no seeded users. Sign up normally, then promote the account in PostgreSQL:
-
-```bash
-psql -U postgres -d civic-events-db -c "UPDATE users SET role='admin' WHERE email='you@example.com';"
-```
-
-The frontend does not expose or send a `role` field during signup.
-
-## Not implemented yet
-
-Events, announcements, promos, notifications, registrations, feedback, profile management, and the admin dashboard.
+- The events list uses `GET /api/events` and filters published events for normal users.
+- Search, location filtering, date filtering, and pagination run in the browser because the API ignores query filters.
+- Event details use `GET /api/events/:id`.
+- Registration uses the register and cancel endpoints.
+- After a registration is cancelled, the API does not allow registering for the same event again.
