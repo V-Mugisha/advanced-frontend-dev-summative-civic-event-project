@@ -120,7 +120,12 @@
 
     function redirectIfAuthenticated() {
         if (isAuthenticated()) {
-            window.location.replace('index.html');
+            if (isAdmin()) {
+                window.location.replace('admin-dashboard.html');
+            } else {
+                window.location.replace('index.html');
+            }
+
             return true;
         }
 

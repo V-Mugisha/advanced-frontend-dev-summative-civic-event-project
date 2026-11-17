@@ -26,6 +26,12 @@
             return;
         }
 
+        // ROLE-BASED GUARD: admins use the admin dashboard instead of the member dashboard.
+        if ($('body').attr('data-user-dashboard') === 'true' && Auth.isAdmin()) {
+            window.location.replace('admin-dashboard.html');
+            return;
+        }
+
         $('#app-shell').removeClass('hidden');
 
         name = user.full_name || 'there';
@@ -36,6 +42,7 @@
         // ROLE-BASED GUARD: admin-only elements start hidden and are shown here.
         if (user.role === 'admin') {
             $('[data-admin-only]').removeClass('hidden').removeAttr('hidden');
+            $('[data-member-only]').addClass('hidden');
         }
 
         page = window.location.pathname.split('/').pop();

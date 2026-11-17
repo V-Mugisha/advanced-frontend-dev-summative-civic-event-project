@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/app.css">
 </head>
-<body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased" data-user-dashboard="true">
     <a href="#main" class="skip-link">Skip to content</a>
 
     <div id="app-shell" class="hidden mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-4 sm:px-6">
@@ -44,7 +44,6 @@
             <nav class="mt-4 flex flex-wrap gap-2" aria-label="Main navigation">
                 <a href="index.html" data-nav="index.html" class="rounded-md px-3 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400">Dashboard</a>
                 <a href="events.html" data-nav="events.html" class="rounded-md px-3 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400">Events</a>
-                <a href="event-form.html" data-nav="event-form.html" data-admin-only class="hidden rounded-md px-3 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400">Create event</a>
             </nav>
         </header>
 
@@ -62,10 +61,6 @@
                         Your session is connected to the CivicEvents+ API. Use the events page to browse what is happening
                         in the community.
                     </p>
-
-                    <div id="admin-note" class="message message--info mt-4 hidden" data-admin-only>
-                        Administrator access detected.
-                    </div>
 
                     <div class="mt-5 flex flex-wrap gap-3">
                         <a href="events.html"

@@ -141,7 +141,12 @@
                     }
 
                     Auth.saveSession(data.user, data.token, remember);
-                    window.location.href = 'index.html?welcome=1';
+
+                    if (data.user.role === 'admin') {
+                        window.location.href = 'admin-dashboard.html?welcome=1';
+                    } else {
+                        window.location.href = 'index.html?welcome=1';
+                    }
                 })
                 .fail(function (xhr) {
                     UI.setLoading(submitButton, false);
