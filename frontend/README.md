@@ -2,7 +2,7 @@
 
 Static frontend for the CivicEvents+ assignment. It uses HTML, Tailwind CSS from the Play CDN, and jQuery.
 
-Current scope: authentication, events browsing, event registration, admin event management, and event feedback.
+Current scope: authentication, events browsing, event registration, admin event management, event feedback, admin dashboard, and user management.
 
 ## Prerequisites
 
@@ -60,3 +60,14 @@ Change that value if the backend runs elsewhere. CORS is enabled on the provided
 - Normal users can add or update their own feedback.
 - Admins do not see the attendee feedback form because they organize the event.
 - Only admins can load all feedback for an event and see the average rating.
+
+## Admin behavior
+
+- Admins land on `admin-dashboard.html` after login.
+- `index.html` is the normal user dashboard and redirects admins to the admin dashboard.
+- Shared pages such as Events replace the member Dashboard link with Admin dashboard for admins.
+- `admin-dashboard.html` shows user, event, registration, feedback, promo, announcement, and notification totals from `GET /api/dashboard/admin`.
+- The user growth chart is rendered with simple CSS bars.
+- `admin-users.html` lists users and supports enable and disable actions.
+- Role changes are not supported by the API.
+- Normal users are redirected away from admin pages.

@@ -6,7 +6,7 @@
         var API = window.CivicAPI;
         var UI = window.CivicUI;
 
-        if (!Auth.isAuthenticated()) {
+        if (!Auth.isAuthenticated() || Auth.isAdmin()) {
             return;
         }
 
