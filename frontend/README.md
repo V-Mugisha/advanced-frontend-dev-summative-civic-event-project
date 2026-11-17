@@ -39,6 +39,7 @@ Change that value if the backend runs elsewhere. CORS is enabled on the provided
 ## Authentication behavior
 
 - Signup requires at least 8 characters with uppercase, lowercase, a number, and a special character.
+- Signup includes a demo-only account type selector. Choose `Administrator` to create an admin account for testing.
 - Login stores the token and `{id, full_name, role}`.
 - Sessions use `sessionStorage` by default. "Remember me" uses `localStorage`; use it only on a trusted device.
 - Tokens expire after one hour. A protected request that returns `401` clears the session and redirects to login.

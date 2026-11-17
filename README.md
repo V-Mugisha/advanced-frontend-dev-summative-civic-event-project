@@ -24,6 +24,10 @@ Requires Node.js 18+ and PostgreSQL 15+.
 
 5. Open `frontend/index.html` in your browser.
 
+## Admin account
+
+To test admin features, create an account and select `Administrator` as the account type on the signup page. This is done intentionally, in a real app, you would never allow users to publicly register as admin, but I did it to simplify the workflow.
+
 ## API base URL
 
 The API URL is configured in `frontend/js/config.js` and defaults to:

@@ -29,7 +29,7 @@
 
         // ROLE-BASED GUARD: admin-only elements start hidden and are shown here.
         if (user.role === 'admin') {
-            $('[data-admin-only]').removeClass('hidden');
+            $('[data-admin-only]').removeClass('hidden').removeAttr('hidden');
         }
 
         page = window.location.pathname.split('/').pop();

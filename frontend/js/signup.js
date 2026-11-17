@@ -7,6 +7,7 @@
         var UI = window.CivicUI;
         var form = $('#signup-form');
         var formElement = form[0];
+        var roleSelect = document.getElementById('role');
         var passwordInput = document.getElementById('password');
         var submitButton = document.getElementById('signup-submit');
         var bar = document.getElementById('password-strength-bar');
@@ -87,6 +88,10 @@
             updateStrength();
         });
 
+        $(roleSelect).on('change', function () {
+            UI.clearFormError(formElement);
+        });
+
         for (i = 0; i < fieldIds.length; i++) {
             (function (fieldId) {
                 var field = document.getElementById(fieldId);
@@ -105,6 +110,7 @@
         form.on('submit', function (event) {
             var fullName = document.getElementById('full_name').value.trim();
             var email = document.getElementById('email').value.trim();
+            var role = roleSelect.value;
             var password = passwordInput.value;
             var confirmation = document.getElementById('confirm_password').value;
             var checks = UI.getPasswordChecks(password);
@@ -145,12 +151,19 @@
                 return;
             }
 
+            if (role !== 'admin') {
+                role = 'user';
+            }
+
             UI.setLoading(submitButton, true, 'Creating account...');
 
+            // DEMO ONLY: the backend accepts role during signup. This lets reviewers create
+            // an admin account without database access. Do not use this in a real application.
             API.post('/auth/signup', {
                 full_name: fullName,
                 email: email,
-                password: password
+                password: password,
+                role: role
             }, true)
                 .done(function () {
                     window.location.href = 'login.html?registered=1';
