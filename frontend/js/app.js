@@ -61,6 +61,10 @@
             $('[data-nav="events.html"]').addClass('bg-slate-800 text-white');
         }
 
+        if (page === 'announcement-detail.html' || page === 'announcement-form.html') {
+            $('[data-nav="announcements.html"]').addClass('bg-slate-800 text-white');
+        }
+
         $('[data-logout]').on('click', function () {
             Auth.logout();
         });

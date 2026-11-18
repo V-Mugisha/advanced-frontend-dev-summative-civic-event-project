@@ -2,7 +2,7 @@
 
 Static frontend for the CivicEvents+ assignment. It uses HTML, Tailwind CSS from the Play CDN, and jQuery.
 
-Current scope: authentication, events browsing, event registration, admin event management, event feedback, admin dashboard, and user management.
+Current scope: authentication, events browsing, event registration, admin event management, event feedback, admin dashboard, user management, and announcements.
 
 ## Prerequisites
 
@@ -71,3 +71,12 @@ Change that value if the backend runs elsewhere. CORS is enabled on the provided
 - `admin-users.html` lists users and supports enable and disable actions.
 - Role changes are not supported by the API.
 - Normal users are redirected away from admin pages.
+
+## Announcements behavior
+
+- The announcements list uses `GET /api/announcements?page=1&limit=100` and filters published items for normal users.
+- Audio duration is computed from the audio element metadata because the API does not return it.
+- Admin create uses the multipart field `audio` and accepts MP3, WAV, M4A, or OGG files up to 5 MB.
+- Admin edit supports title and published changes. Audio cannot be replaced through the edit endpoint.
+- Publish, unpublish, and delete use the admin-only endpoints.
+- Announcement creation still shows a toast because the assignment requires it.
