@@ -122,6 +122,25 @@
         }, 5000);
     }
 
+    function showToast(message) {
+        var toast = document.getElementById('app-toast');
+
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'app-toast';
+            toast.className = 'toast';
+            toast.setAttribute('role', 'status');
+            document.body.appendChild(toast);
+        }
+
+        toast.textContent = message;
+        toast.hidden = false;
+        window.clearTimeout(toast.hideTimer);
+        toast.hideTimer = window.setTimeout(function () {
+            toast.hidden = true;
+        }, 5000);
+    }
+
     function bindPasswordToggles(root) {
         var buttons = root.querySelectorAll('[data-password-toggle]');
         var i;
@@ -237,6 +256,7 @@
         setLoading: setLoading,
         showMessage: showMessage,
         showSignupToast: showSignupToast,
+        showToast: showToast,
         bindPasswordToggles: bindPasswordToggles,
         getPasswordChecks: getPasswordChecks,
         renderPasswordStrength: renderPasswordStrength
