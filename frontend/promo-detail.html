@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#020617">
+    <title>Promo details | CivicEvents+</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <div id="app-shell" class="hidden mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-4 sm:px-6">
+        <header class="border-b border-slate-800 pb-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <a href="index.html" class="inline-flex items-center gap-3 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400" aria-label="CivicEvents+ dashboard">
+                    <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-400 font-bold text-slate-950">C+</span>
+                    <span class="text-sm font-semibold text-slate-200">CivicEvents+</span>
+                </a>
+
+                <form action="events.html" method="get" class="order-3 w-full sm:order-2 sm:max-w-xs" role="search">
+                    <label for="global-search" class="sr-only">Search events</label>
+                    <input id="global-search" name="search" type="search" placeholder="Search events"
+                        class="w-full rounded-md border border-slate-600 bg-slate-900 px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400">
+                </form>
+
+                <details class="user-menu relative order-2 sm:order-3">
+                    <summary class="flex cursor-pointer list-none items-center gap-2 rounded-md border border-slate-700 px-2 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                        <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-400 text-xs font-bold text-slate-950" data-user-initials>C</span>
+                        <span class="hidden sm:inline" data-user-name>User</span>
+                    </summary>
+                    <div class="absolute right-0 z-20 mt-2 w-56 rounded-md border border-slate-700 bg-slate-900 p-3 shadow-lg">
+                        <p class="text-sm font-semibold text-white" data-user-name>User</p>
+                        <p class="mt-1 text-xs text-slate-400" data-user-role>Member</p>
+                        <button type="button" data-logout
+                            class="mt-3 w-full rounded-md border border-slate-600 px-3 py-2 text-left text-sm text-slate-200 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                            Sign out
+                        </button>
+                    </div>
+                </details>
+            </div>
+
+            <nav class="mt-4 flex flex-wrap gap-2" aria-label="Main navigation">
+                <a href="index.html" data-nav="index.html" data-member-only class="rounded-md px-3 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400">Dashboard</a>
+                <a href="admin-dashboard.html" data-nav="admin-dashboard.html" data-admin-only class="hidden rounded-md px-3 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400">Admin dashboard</a>
+                <a href="events.html" data-nav="events.html" class="rounded-md px-3 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400">Events</a>
+                <a href="announcements.html" data-nav="announcements.html" class="rounded-md px-3 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400">Announcements</a>
+                <a href="promos.html" data-nav="promos.html" class="rounded-md px-3 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400">Promos</a>
+                <a href="event-form.html" data-nav="event-form.html" data-admin-only class="hidden rounded-md px-3 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400">Create event</a>
+            </nav>
+        </header>
+
+        <main id="main" class="flex-1 py-6">
+            <a href="promos.html" class="text-sm font-medium text-cyan-300 hover:underline">Back to promos</a>
+
+            <div id="page-message" class="message mt-4" role="status" hidden></div>
+            <div id="detail-message" class="message mt-4" role="status" hidden></div>
+            <div id="detail-loading" class="message message--info mt-4" role="status">Loading promo...</div>
+
+            <article id="promo-detail" class="mt-4 hidden rounded-lg border border-slate-700 bg-slate-900 p-6">
+                <div id="admin-promo-actions" class="mb-4 hidden flex flex-wrap items-center gap-2" data-admin-only>
+                    <span id="promo-status" class="text-xs text-slate-400">Published</span>
+                    <a id="edit-promo" href="#"
+                        class="rounded-md border border-slate-600 px-3 py-1.5 text-xs font-medium text-slate-200 hover:bg-slate-800">
+                        Edit
+                    </a>
+                    <button id="publish-promo" type="button"
+                        class="rounded-md border border-slate-600 px-3 py-1.5 text-xs font-medium text-slate-200 hover:bg-slate-800 disabled:opacity-60">
+                        Unpublish
+                    </button>
+                    <button id="delete-promo" type="button"
+                        class="rounded-md border border-rose-700 px-3 py-1.5 text-xs font-medium text-rose-200 hover:bg-rose-950 disabled:opacity-60">
+                        Delete
+                    </button>
+                </div>
+
+                <h1 id="promo-title" class="text-2xl font-bold text-white sm:text-3xl">Promo</h1>
+                <p id="promo-date" class="mt-2 text-sm text-slate-500">Date not set</p>
+                <p id="promo-description" class="mt-3 text-sm leading-6 text-slate-300"></p>
+
+                <video id="promo-video" controls preload="metadata" class="mt-4 w-full rounded-md bg-black">
+                    Your browser does not support the video element.
+                    <track id="promo-track" kind="captions" srclang="en" label="English" default>
+                </video>
+
+                <div id="video-warning" class="message message--warning mt-3" role="alert" hidden></div>
+
+                <p class="mt-2 text-xs text-slate-500">
+                    If the video does not play,
+                    <a id="video-link" class="text-cyan-300 hover:underline" href="#" target="_blank" rel="noopener">open the video file</a>.
+                </p>
+
+                <section class="mt-6" aria-labelledby="transcript-heading">
+                    <h2 id="transcript-heading" class="text-lg font-semibold text-white">Transcript</h2>
+                    <p id="promo-transcript" class="mt-2 whitespace-pre-line text-sm leading-6 text-slate-400">No captions provided.</p>
+                </section>
+            </article>
+        </main>
+
+        <footer class="flex flex-col gap-2 border-t border-slate-800 py-4 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+            <p>CivicEvents+ | Community events, clearly organised.</p>
+            <p>Need help? Contact your community administrator.</p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/promo-detail.js"></script>
+</body>
+</html>

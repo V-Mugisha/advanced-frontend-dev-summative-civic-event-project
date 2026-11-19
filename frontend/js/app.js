@@ -65,6 +65,10 @@
             $('[data-nav="announcements.html"]').addClass('bg-slate-800 text-white');
         }
 
+        if (page === 'promo-detail.html' || page === 'promo-form.html') {
+            $('[data-nav="promos.html"]').addClass('bg-slate-800 text-white');
+        }
+
         $('[data-logout]').on('click', function () {
             Auth.logout();
         });

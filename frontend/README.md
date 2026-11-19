@@ -2,7 +2,7 @@
 
 Static frontend for the CivicEvents+ assignment. It uses HTML, Tailwind CSS from the Play CDN, and jQuery.
 
-Current scope: authentication, events browsing, event registration, admin event management, event feedback, admin dashboard, user management, and announcements.
+Current scope: authentication, events browsing, event registration, admin event management, event feedback, admin dashboard, user management, announcements, and promos.
 
 ## Prerequisites
 
@@ -80,3 +80,17 @@ Change that value if the backend runs elsewhere. CORS is enabled on the provided
 - Admin edit supports title and published changes. Audio cannot be replaced through the edit endpoint.
 - Publish, unpublish, and delete use the admin-only endpoints.
 - Announcement creation still shows a toast because the assignment requires it.
+
+## Promos behavior
+
+- The promos list uses `GET /api/promos?page=1&limit=100` and filters published items for normal users.
+- Client-side pagination shows 6 promos per page.
+- Captions are built from `caption_text` as a single WebVTT cue using a Blob URL.
+- The caption text is also shown as a transcript.
+- Admin create uses the multipart field `video`. The frontend accepts MP4 only because browsers do not reliably play AVI, MKV, or MOV.
+- The backend upload limit is 8 MB, so the frontend enforces the same limit.
+- MP4 files should use H.264 video and AAC audio for the best browser support.
+- Admin edit can update the text fields and optionally replace the video.
+- Unsupported or unplayable video files show a warning with a direct file link.
+- Publish, unpublish, and delete use the admin-only endpoints.
+- Promo actions use inline messages; no promo toast is required.
