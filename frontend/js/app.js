@@ -3,6 +3,7 @@
 
     $(function () {
         var Auth = window.CivicAuth;
+        var API = window.CivicAPI;
         var user;
         var name;
         var page;
@@ -72,5 +73,33 @@
         $('[data-logout]').on('click', function () {
             Auth.logout();
         });
+
+        loadNotificationCount();
+
+        function loadNotificationCount() {
+            API.get('/notifications')
+                .done(function (response) {
+                    var notifications = response.data || [];
+                    var unread = 0;
+                    var badge = $('[data-notification-count]');
+                    var i;
+
+                    for (i = 0; i < notifications.length; i++) {
+                        if (notifications[i].read === false) {
+                            unread++;
+                        }
+                    }
+
+                    if (unread > 0) {
+                        badge.text(unread).removeClass('hidden');
+                    } else {
+                        badge.text('').addClass('hidden');
+                    }
+                });
+        }
+
+        window.CivicApp = {
+            refreshNotificationCount: loadNotificationCount
+        };
     });
 })(window, window.jQuery);

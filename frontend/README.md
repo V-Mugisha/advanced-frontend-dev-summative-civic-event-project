@@ -2,7 +2,7 @@
 
 Static frontend for the CivicEvents+ assignment. It uses HTML, Tailwind CSS from the Play CDN, and jQuery.
 
-Current scope: authentication, events browsing, event registration, admin event management, event feedback, admin dashboard, user management, announcements, and promos.
+Current scope: authentication, events browsing, event registration, admin event management, event feedback, admin dashboard, user management, announcements, promos, and notifications.
 
 ## Prerequisites
 
@@ -94,3 +94,12 @@ Change that value if the backend runs elsewhere. CORS is enabled on the provided
 - Unsupported or unplayable video files show a warning with a direct file link.
 - Publish, unpublish, and delete use the admin-only endpoints.
 - Promo actions use inline messages; no promo toast is required.
+
+## Notifications behavior
+
+- The header bell shows an unread count from notifications where `read === false`.
+- The notifications page lists broadcast and targeted notifications for the logged-in user.
+- Related links use `metadata.event_id`, `metadata.announcement_id`, or `metadata.promo_id`.
+- Admin users can delete notifications. Normal users cannot.
+- The API has no mark-as-read endpoint, so unread counts cannot be cleared from the frontend.
+- Notification deletion refreshes the header count.

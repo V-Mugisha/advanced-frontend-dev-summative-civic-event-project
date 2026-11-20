@@ -25,7 +25,13 @@
                         class="w-full rounded-md border border-slate-600 bg-slate-900 px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400">
                 </form>
 
-                <details class="user-menu relative order-2 sm:order-3">
+                                <a href="notifications.html" class="relative order-2 rounded-md border border-slate-700 p-2 text-slate-200 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-400" aria-label="Notifications">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.4-1.4A2 2 0 0118 14.2V11a6 6 0 10-12 0v3.2a2 2 0 01-.6 1.4L4 17h5m6 0a3 3 0 11-6 0"></path>
+                    </svg>
+                    <span data-notification-count class="absolute -right-1 -top-1 hidden rounded-full bg-rose-500 px-1.5 py-0.5 text-xs font-bold text-white" aria-live="polite"></span>
+                </a>
+<details class="user-menu relative order-2 sm:order-3">
                     <summary class="flex cursor-pointer list-none items-center gap-2 rounded-md border border-slate-700 px-2 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-400">
                         <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-400 text-xs font-bold text-slate-950" data-user-initials>C</span>
                         <span class="hidden sm:inline" data-user-name>User</span>
