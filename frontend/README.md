@@ -7,7 +7,10 @@ Current scope: authentication, events browsing, event registration, admin event 
 ## Prerequisites
 
 - The backend running at `http://localhost:4000`. See `../backend/README.md`.
-- A static file server. Python 3 is enough. There is no frontend build step.
+- A modern browser.
+- Optional: the VS Code Live Server extension.
+
+There is no frontend build step.
 
 ## Run locally
 
@@ -17,14 +20,9 @@ Current scope: authentication, events browsing, event registration, admin event 
    npm run dev
    ```
 
-2. Serve the frontend from the repository root:
-   ```bash
-   python3 -m http.server 5500 --directory frontend
-   ```
+2. Open `frontend/index.html` directly in your browser, or right-click it in VS Code and choose Open with Live Server.
 
-3. Open `http://localhost:5500/signup.html` or `http://localhost:5500/login.html`.
-
-Use the HTTP server instead of opening the HTML files directly so browser requests work normally.
+3. Sign up, or log in if you already have an account.
 
 ## API base URL
 
@@ -43,7 +41,7 @@ Change that value if the backend runs elsewhere. CORS is enabled on the provided
 - Login stores the token and `{id, full_name, role}`.
 - Sessions use `sessionStorage` by default. "Remember me" uses `localStorage`; use it only on a trusted device.
 - Tokens expire after one hour. A protected request that returns `401` clears the session and redirects to login.
-- Success and error messages use normal page elements. Signup success uses a simple toast because the assignment asks for it.
+- Success and error messages use normal page elements. Signup and announcement creation use simple toasts because the assignment asks for them.
 - Protected pages call `CivicAuth.requireAuth()`. Role-based guards are commented in `js/auth.js`, `js/app.js`, and pages with admin actions.
 
 ## Events behavior

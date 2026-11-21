@@ -1,6 +1,6 @@
-# CivicEvent+ Project
+# CivicEvents+ Project
 
-CivicEvent+ frontend built with HTML, Tailwind CSS, and jQuery. The backend API is in `backend/`.
+CivicEvents+ frontend built with HTML, Tailwind CSS, and jQuery. The backend API is in `backend/`.
 
 ## Setup
 
@@ -22,11 +22,13 @@ Requires Node.js 18+ and PostgreSQL 15+.
    npm run dev
    ```
 
-5. Open `frontend/index.html` in your browser.
+5. Open `frontend/index.html` directly in your browser, or right-click it in VS Code and choose Open with Live Server.
+
+The backend must be running before using login, events, announcements, promos, notifications, or any other API-backed feature.
 
 ## Admin account
 
-To test admin features, create an account and select `Administrator` as the account type on the signup page. This is done intentionally, in a real app, you would never allow users to publicly register as admin, but I did it to simplify the workflow.
+To test admin features, create an account and select `Administrator` as the account type on the signup page. This is enabled intentionally for the assignment demo. A real application would not allow public admin registration.
 
 ## API base URL
 
