@@ -2,7 +2,7 @@
 
 Static frontend for the CivicEvents+ assignment. It uses HTML, Tailwind CSS from the Play CDN, and jQuery.
 
-Current scope: authentication, events browsing, event registration, admin event management, event feedback, admin dashboard, user management, announcements, promos, and notifications.
+Current scope: authentication, events browsing, event registration, admin event management, event feedback, admin dashboard, user management, announcements, promos, notifications, profile, and my registrations.
 
 ## Prerequisites
 
@@ -103,3 +103,19 @@ Change that value if the backend runs elsewhere. CORS is enabled on the provided
 - Admin users can delete notifications. Normal users cannot.
 - The API has no mark-as-read endpoint, so unread counts cannot be cleared from the frontend.
 - Notification deletion refreshes the header count.
+
+## Profile behavior
+
+- Profile data uses `GET /api/users/profile/me`.
+- Only full name and email can be edited with `PATCH /api/users/profile/me`.
+- Role and active status are read-only.
+- Duplicate email addresses return `409`.
+- A successful update also refreshes the stored session user and header name.
+
+## My registrations behavior
+
+- The page loads `GET /api/event-registrations/my-registrations`.
+- Only rows with `status === 'registered'` are shown.
+- Cancel uses `POST /api/event-registrations/cancel` with `{event_id}`.
+- Cancelled registrations cannot be re-created because the unique row remains.
+- Admins are redirected because they do not register for events.

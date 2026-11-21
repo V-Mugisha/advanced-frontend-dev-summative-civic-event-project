@@ -59,6 +59,29 @@
         window.localStorage.removeItem(LOGIN_TIME_KEY);
     }
 
+    function updateStoredUser(user) {
+        var storage = null;
+
+        if (window.sessionStorage.getItem(TOKEN_KEY)) {
+            storage = window.sessionStorage;
+        } else if (window.localStorage.getItem(TOKEN_KEY)) {
+            storage = window.localStorage;
+        }
+
+        if (!storage || !user) {
+            return;
+        }
+
+        storage.setItem(
+            USER_KEY,
+            JSON.stringify({
+                id: user.id,
+                full_name: user.full_name,
+                role: user.role
+            })
+        );
+    }
+
     function getLoginTime() {
         var value = window.sessionStorage.getItem(LOGIN_TIME_KEY);
 
@@ -141,6 +164,7 @@
         getToken: getToken,
         getUser: getUser,
         saveSession: saveSession,
+        updateStoredUser: updateStoredUser,
         clearSession: clearSession,
         isAuthenticated: isAuthenticated,
         isAdmin: isAdmin,

@@ -33,6 +33,12 @@
             return;
         }
 
+        // ROLE-BASED GUARD: member-only pages redirect admins.
+        if ($('body').attr('data-member-page') === 'true' && Auth.isAdmin()) {
+            window.location.replace('admin-dashboard.html');
+            return;
+        }
+
         $('#app-shell').removeClass('hidden');
 
         name = user.full_name || 'there';
