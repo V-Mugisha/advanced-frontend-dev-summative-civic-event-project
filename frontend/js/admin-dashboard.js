@@ -52,47 +52,55 @@
         }
 
         function renderGrowth(growth) {
-            var chart = $('#growth-chart');
+            var body = $('#growth-table-body');
             var max = 0;
+            var total = 0;
             var i;
             var value;
-            var height;
-            var column;
+            var percent;
+            var row;
+            var barWrap;
             var bar;
-            var label;
 
-            chart.empty();
+            body.empty();
+            $('#growth-table-wrap').addClass('hidden');
+            $('#growth-empty').addClass('hidden');
 
             if (!growth.length) {
+                $('#growth-total').text(0);
                 $('#growth-empty').removeClass('hidden');
                 return;
             }
 
-            $('#growth-empty').addClass('hidden');
-
             for (i = 0; i < growth.length; i++) {
                 value = Number(growth[i].new_users) || 0;
+                total = total + value;
 
                 if (value > max) {
                     max = value;
                 }
             }
 
+            $('#growth-total').text(total);
+            $('#growth-table-wrap').removeClass('hidden');
+
             for (i = 0; i < growth.length; i++) {
                 value = Number(growth[i].new_users) || 0;
-                height = max > 0 ? Math.round((value / max) * 140) : 0;
+                percent = max > 0 ? Math.round((value / max) * 100) : 0;
 
-                column = $('<div>').addClass('flex flex-1 flex-col items-center justify-end gap-1');
+                row = $('<tr>');
+                row.append($('<td>').addClass('py-2 pr-4 text-slate-300').text(growth[i].month || 'Unknown'));
+                row.append($('<td>').addClass('py-2 pr-4 font-medium text-white').text(value));
+
+                barWrap = $('<div>').addClass('h-2 w-32 rounded bg-slate-800');
                 bar = $('<div>')
-                    .addClass('w-full rounded-t bg-cyan-400')
-                    .css('height', height + 'px')
-                    .attr('title', (growth[i].month || '') + ': ' + value + ' new users');
-                label = $('<span>').addClass('text-xs text-slate-500').text(growth[i].month || '');
+                    .addClass('h-2 rounded bg-cyan-400')
+                    .css('width', percent + '%')
+                    .attr('title', value + ' new users');
+                barWrap.append(bar);
+                row.append($('<td>').addClass('py-2').append(barWrap));
 
-                column.append($('<span>').addClass('text-xs text-slate-400').text(value));
-                column.append(bar);
-                column.append(label);
-                chart.append(column);
+                body.append(row);
             }
         }
     });

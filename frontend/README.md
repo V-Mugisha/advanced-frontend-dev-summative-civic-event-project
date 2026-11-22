@@ -65,7 +65,7 @@ Change that value if the backend runs elsewhere. CORS is enabled on the provided
 - `index.html` is the normal user dashboard and redirects admins to the admin dashboard.
 - Shared pages such as Events replace the member Dashboard link with Admin dashboard for admins.
 - `admin-dashboard.html` shows user, event, registration, feedback, promo, announcement, and notification totals from `GET /api/dashboard/admin`.
-- The user growth chart is rendered with simple CSS bars.
+- User growth is shown in a table with simple inline bars.
 - `admin-users.html` lists users and supports enable and disable actions.
 - Role changes are not supported by the API.
 - Normal users are redirected away from admin pages.
