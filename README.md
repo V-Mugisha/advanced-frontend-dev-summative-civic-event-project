@@ -37,3 +37,7 @@ The API URL is configured in `frontend/js/config.js` and defaults to:
 ```text
 http://localhost:4000/api
 ```
+
+## Video Walkthrough
+
+[Watch the walkthrough](https://youtu.be/RTyaT6k8SCs)
