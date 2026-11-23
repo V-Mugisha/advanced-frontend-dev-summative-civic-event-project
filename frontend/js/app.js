@@ -64,7 +64,7 @@
             }
         });
 
-        if (page === 'event-detail.html') {
+        if (page === 'event-detail.html' || page === 'event-form.html') {
             $('[data-nav="events.html"]').addClass('bg-slate-800 text-white');
         }
 
